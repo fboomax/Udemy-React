@@ -10,7 +10,7 @@ const personFun = (props) => {
   return (
     <div className="person">
       <p onClick={props.click}>
-        My name is {my_name} and my age is {props.info["age"]}
+        The name of the frist person is {my_name} and the age is {props.info["age"]}
       </p>
       <input
         type="text"

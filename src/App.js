@@ -78,15 +78,15 @@ class App extends Component {
         >
           Show me the money!!
         </button>
-        <h1>To App pou arxizw kai katalavainw</h1>
+        <h1>The app to show People</h1>
         {this.state.showPersons ? (
           <div>
-            <PersonComponent info={this.state.personsName[1]} />
             <PersonFun
               click={this.switchNameHandler.bind(this, "KING", 37)}
               change={this.nameChangedHandler}
               info={this.state.personsName[0]}
             />
+            <PersonComponent info={this.state.personsName[1]} />
           </div>
         ) : null}
       </div>

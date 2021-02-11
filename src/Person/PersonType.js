@@ -21,7 +21,7 @@ class personComponent extends Component {
     return (
       <div className="person">
         <p>
-          The name of my love is {this.props.info.name} and her age is{" "}
+          The name of the second person is {this.props.info.name} and her age is{" "}
           {this.props.info.age}
         </p>
       </div>
