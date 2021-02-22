@@ -13,14 +13,14 @@ class personComponent extends Component {
   //     },
   // );
   render() {
-    console.log("Class");
-    console.log("state");
-    console.log(this.state);
-    console.log("props");
-    console.log(this.props.info);
+    // console.log("Class");
+    // console.log("state");
+    // console.log(this.state);
+    // console.log("props");
+    // console.log(this.props.info);
     return (
       <div className="person">
-        <p>
+        <p onClick={this.props.click}>
           The name of the second person is {this.props.info.name} and her age is{" "}
           {this.props.info.age}
         </p>

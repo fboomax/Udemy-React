@@ -6,11 +6,12 @@ const personFun = (props) => {
   let my_age = props.info["age"];
 
   console.log("Function");
-  console.log(props);
+  console.log(props.info);
   return (
     <div className="person">
       <p onClick={props.click}>
-        The name of the frist person is {my_name} and the age is {props.info["age"]}
+        The name of the frist person is {my_name} and the age is{" "}
+        {props.info["age"]}
       </p>
       <input
         type="text"

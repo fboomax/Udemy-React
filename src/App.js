@@ -7,8 +7,8 @@ import PersonFun from "./Person/PersonFun";
 class App extends Component {
   state = {
     personsName: [
-      { name: "Foivos", age: 28 },
-      { name: "Evi", age: 27 },
+      { id: "aa", name: "Foivos", age: 28 },
+      { id: "bb", name: "Evi", age: 27 },
     ],
     numClick: 0,
     showPersons: false,
@@ -28,73 +28,116 @@ class App extends Component {
         },
       ],
     });
-    console.log(this.state.personsName);
+    // console.log(this.state.personsName);
   };
-  nameChangedHandler = (event) => {
+  nameChangedHandler = (event, index) => {
     console.log("CHANGED!!");
-    console.log(event);
-    console.log("end event");
-    this.setState({
-      personsName: [
-        {
-          name: event.target.value,
-          age: 27,
-        },
-        {
-          name: "Evaggelia",
-          age: 37,
-        },
-      ],
+    // console.log(event);
+    // console.log("end event");
+
+    let personIndex = this.state.personsName.findIndex((p) => {
+      return p.id === index;
     });
+
+    let changePersonByIdObject = {
+      ...this.state.personsName[personIndex],
+    };
+    changePersonByIdObject.name = event.target.value;
+    const newPersonsName = [...this.state.personsName];
+    newPersonsName[personIndex] = changePersonByIdObject;
+    this.setState({ personsName: newPersonsName });
+    // let person = Object.assign({}, this.state.personsName.[personIndex])
   };
 
-  togglePersonHandler = (numClick) => {
-    console.log("Click!!");
-    console.log(numClick);
-    this.setState({
-      numClick: numClick + 1,
-    });
+  togglePersonHandler = () => {
+    // console.log("Click!!");
+    let opposite = this.state.showPersons;
+    this.setState({ showPersons: !opposite });
+    // console.log(this.state.showPersons);
+  };
 
-    if (numClick % 2 == 0) {
-      this.setState({
-        showPersons: true,
-      });
-    } else {
-      this.setState({
-        showPersons: false,
-      });
+  deleteHandler = (personID) => {
+    // let tempPersonsName = this.state.personsName.slice();
+    let tempPersonsName = [...this.state.personsName];
+    console.log("delete");
+    console.log(tempPersonsName);
+    tempPersonsName.splice(personID, 1);
+    this.setState({ personsName: tempPersonsName });
+  };
+
+  render() {
+    // console.log(this.state.showPersons);
+    // console.log(this.state.personsName);
+
+    let jsxPerson = null;
+
+    if (this.state.showPersons) {
+      jsxPerson = (
+        <div>
+          {this.state.personsName.map((person, index) => {
+            // console.log(person);
+            return (
+              <PersonComponent
+                info={person}
+                click={() => this.deleteHandler(index)}
+                key={person.id}
+              />
+            );
+          })}
+
+          {this.state.personsName.map((person) => {
+            // console.log("PerosnFun main");
+            // console.log(person);
+            return (
+              <PersonFun
+                info={person}
+                click={() => this.switchNameHandler("KING", 37)}
+                key={person.id}
+                change={(event) => this.nameChangedHandler(event, person.id)}
+              />
+            );
+          })}
+        </div>
+      );
     }
 
-    console.log(this.state.showPersons);
-  };
-  render() {
-    console.log(this.state.showPersons);
-    console.log(this.state.personsName);
     return (
       <div className="App">
         <button
           className="menuButton"
-          onClick={() => this.togglePersonHandler(this.state.numClick)}
+          // onClick={() => this.togglePersonHandler(this.state.numClick)}
+          onClick={this.togglePersonHandler}
         >
           Show me the money!!
         </button>
         <h1>The app to show People</h1>
-        {this.state.showPersons ? (
-          <div>
-            <PersonFun
-              click={this.switchNameHandler.bind(this, "KING", 37)}
-              change={this.nameChangedHandler}
-              info={this.state.personsName[0]}
-            />
-            <PersonComponent info={this.state.personsName[1]} />
-          </div>
-        ) : null}
+        {jsxPerson}
       </div>
     );
   }
 }
 
 export default App;
+
+// togglePersonHandler = (numClick) => {
+//   console.log("Click!!");
+//   console.log(numClick);
+//   this.setState({
+//     numClick: numClick + 1,
+//   });
+
+//   if (numClick % 2 == 0) {
+//     this.setState({
+//       showPersons: true,
+//     });
+//   } else {
+//     this.setState({
+//       showPersons: false,
+//     });
+//   }
+
+//   console.log(this.state.showPersons);
+// };
 
 // import "./App.css";
 // import { useState } from "react";
