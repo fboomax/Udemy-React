@@ -4,6 +4,7 @@ import "../../../style/Person.css";
 
 class personComponent extends Component {
   render() {
+    console.log("[PersonComponent.js] rendering");
     return (
       <div className="person">
         aek

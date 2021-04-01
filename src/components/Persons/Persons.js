@@ -1,9 +1,9 @@
 import React from "react";
 import PersonComponent from "./Person/PersonComponent";
 
-
-const PersonsShowComponent = (props) =>
-  props.info.map((person, index) => {
+const PersonsShowComponent = (props) => {
+  console.log("[Persons.js] rendering");
+  return props.info.map((person, index) => {
     return (
       <PersonComponent
         info={person}
@@ -12,7 +12,6 @@ const PersonsShowComponent = (props) =>
       />
     );
   });
-
-
+};
 
 export default PersonsShowComponent;

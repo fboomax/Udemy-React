@@ -5,8 +5,14 @@ import PersonComponent from "../components/Persons/Person/PersonComponent";
 import PersonFun from "../components/Persons/Person/PersonFun";
 import PersonsShowComponent from "../components/Persons/Persons";
 import PersonsShowFunction from "../components/Persons/PersonsFun";
+import Cockpit from "../components/Cockpit/Cockpit";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log("[App.js] constructor");
+  }
+
   state = {
     personsName: [
       { id: "aa", name: "Foivos", age: 28 },
@@ -15,6 +21,16 @@ class App extends Component {
     numClick: 0,
     showPersons: false,
   };
+
+  static getDerivedStateFromProps(props, state) {
+    console.log("[App.js] getDerivedStateFromProps", props);
+    return state;
+  }
+
+  componentDidMount() {
+    console.log("[App.js] componentDidMoun");
+  }
+
   nameChangedHandler = (event, index) => {
     console.log("CHANGED!!");
 
@@ -43,6 +59,7 @@ class App extends Component {
     this.setState({ personsName: tempPersonsName });
   };
   render() {
+    console.log("[App.js] render");
     let jsxPerson = null;
 
     if (this.state.showPersons) {
@@ -66,11 +83,11 @@ class App extends Component {
 
     return (
       <div className="App">
-        <button className="menuButton" onClick={this.togglePersonHandler}>
-          Show me the money!!
-        </button>
-        <h1>The app to show People</h1>
-
+        {" "}
+        <Cockpit
+          theTitle={this.props.appTitle}
+          clicked={this.togglePersonHandler}
+        />
         {jsxPerson}
       </div>
     );
